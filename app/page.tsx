@@ -18,7 +18,7 @@ export default function Home() {
         </p>
         <Link 
           href="#initiatieven" 
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition inline-block"
         >
           Bekijk onze projecten &rarr;
         </Link>
@@ -27,13 +27,17 @@ export default function Home() {
       {/* Over Mij Sectie */}
       <section className="w-full max-w-5xl mx-auto py-20 px-6">
         <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-10">
-          <div className="w-full md:w-1/3 aspect-square bg-slate-200 rounded-2xl flex items-center justify-center text-slate-400 font-bold">
-            [Jouw Foto]
+          <div className="w-full md:w-1/3 aspect-square relative rounded-2xl overflow-hidden shadow-md border border-slate-100">
+            <img 
+              src="/profiel.jpg" 
+              alt="Chris - CB Dienstverlening" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="w-full md:w-2/3">
-            <h2 className="text-3xl font-bold mb-4">Over CB Dienstverlening</h2>
+            <h2 className="text-3xl font-bold mb-4 text-slate-900">Over CB Dienstverlening</h2>
             <p className="text-slate-600 leading-relaxed text-lg">
-              CB Dienstverlening is opgericht door mij, [Jouw Naam]. Met jarenlange ervaring in IT-beheer combineer ik praktische IT-kennis met moderne webtechnologie. 
+              CB Dienstverlening is opgericht door mij, Chris. Met jarenlange ervaring in IT-beheer combineer ik praktische IT-kennis met moderne webtechnologie. 
             </p>
             <p className="text-slate-600 leading-relaxed text-lg mt-4">
               Mijn doel is software te bouwen die écht tijd bespaart. Geen overbodige toeters en bellen, maar tools die direct waarde toevoegen aan jouw dagelijkse werkzaamheden.
@@ -43,9 +47,9 @@ export default function Home() {
       </section>
 
       {/* Initiatieven Sectie */}
-      <section id="initiatieven" className="w-full py-20 px-6">
+      <section id="initiatieven" className="w-full py-20 px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto text-center mb-16">
-          <h2 className="text-4xl font-extrabold mb-4">Onze Initiatieven</h2>
+          <h2 className="text-4xl font-extrabold mb-4 text-slate-900">Onze Initiatieven</h2>
           <p className="text-slate-600 text-lg">
             We bouwen applicaties die pijnpunten oplossen. Geen overbodige functies, <br />gewoon tools die werken. Ontdek ons eerste project.
           </p>
@@ -55,13 +59,21 @@ export default function Home() {
           <div className="mb-4">
             <span className="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Nu Live</span>
           </div>
-          <h3 className="text-3xl font-bold mb-4">Tikbon.com</h3>
+          <h3 className="text-3xl font-bold mb-4 text-slate-900">Tikbon.com</h3>
           <p className="text-slate-600 mb-6 text-lg">
             De ultra-snelle "Snelle Werkbon" PWA voor de mobiele ZZP'er (installateurs, monteurs, klusbedrijven).
           </p>
-          {/* Hier kun je evt. je screenshot of link naar Tikbon plaatsen */}
+          <a 
+            href="https://tikbon.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block bg-blue-50 text-blue-600 hover:bg-blue-100 font-semibold px-6 py-3 rounded-xl transition"
+          >
+            Bezoek Tikbon.com &rarr;
+          </a>
         </div>
       </section>
+
     </main>
   );
 }
