@@ -1,29 +1,165 @@
-import Link from "next/link";
-import { Calendar } from "lucide-react";
+'use client';
 
-export default function AfspraakMaken() {
+import { useState } from 'react';
+import Link from 'next/link';
+import { Send, CheckCircle2, MessageSquare, Clock, Zap } from 'lucide-react';
+
+export default function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+
+    // Koppel de velden aan je Google Form entry IDs
+    // (Vervang deze entry.XXXXXX nummers door jouw eigen Google Form veld-IDs als je die weet)
+    const googleFormData = new FormData();
+    googleFormData.append('entry.123456789', formData.get('naam') as string);
+    googleFormData.append('entry.987654321', formData.get('email') as string);
+    googleFormData.append('entry.456789123', formData.get('onderwerp') as string);
+    googleFormData.append('entry.654321987', formData.get('bericht') as string);
+
+    try {
+      await fetch(
+        'https://docs.google.com/forms/d/e/1FAIpQLSen5gqKsPpPqEoeImxcu2AgEDqQZUtT_CfDRpdYoOWDuHKP3w/formResponse',
+        {
+          method: 'POST',
+          mode: 'no-cors', // Vereist voor Google Forms POST
+          body: googleFormData,
+        }
+      );
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Fout bij versturen:', error);
+      alert('Er ging iets mis. Probeer het opnieuw.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <main className="min-h-screen py-24 px-6 flex flex-col items-center justify-center bg-slate-50">
-      <div className="max-w-2xl w-full bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-200 text-center">
-        <div className="mx-auto bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-          <Calendar className="text-blue-600 w-8 h-8" />
-        </div>
-        <h1 className="text-3xl font-extrabold mb-4 text-slate-900">Afspraak Maken</h1>
-        <p className="text-slate-600 mb-10 text-lg">
-          Kies hieronder een datum en tijd die jou uitkomt in de kalender. We kijken uit naar ons gesprek!
-        </p>
+    <main className="min-h-screen py-20 px-6 bg-slate-900 text-white flex flex-col items-center justify-center">
+      <div className="max-w-3xl w-full">
         
-        {/* Placeholder voor Calendly (of ander systeem) */}
-        <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl h-80 flex flex-col items-center justify-center text-slate-400 mb-10">
-          <p className="font-medium text-slate-500">Plaats hier je Calendly / plannings widget</p>
-          <code className="text-sm bg-slate-200 px-3 py-1 rounded mt-2 text-slate-600">
-            {'<iframe src="jouw-calendly-url" />'}
-          </code>
+        {/* USPs voor Asynchrone Communicatie */}
+        <div className="text-center mb-12">
+          <div className="inline-block bg-blue-500/20 text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-blue-500/30">
+            Asynchroon & Direct ⚡
+          </div>
+          <h1 className="text-4xl font-extrabold mb-4">Stuur ons een bericht</h1>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Wij geloven in gefocust werken zonder afleiding. Laat je vraag of idee achter en we reageren binnen 24 uur met een inhoudelijk antwoord.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
+            <div className="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl flex items-center space-x-3">
+              <Clock className="text-blue-400 w-6 h-6 flex-shrink-0" />
+              <span className="text-sm text-slate-300">Geen lange telefoontjes, direct ter zake.</span>
+            </div>
+            <div className="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl flex items-center space-x-3">
+              <MessageSquare className="text-blue-400 w-6 h-6 flex-shrink-0" />
+              <span className="text-sm text-slate-300">Reactie via e-mail op jouw tempo.</span>
+            </div>
+            <div className="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl flex items-center space-x-3">
+              <Zap className="text-blue-400 w-6 h-6 flex-shrink-0" />
+              <span className="text-sm text-slate-300">Snel een helder en inhoudelijk advies.</span>
+            </div>
+          </div>
         </div>
-        
-        <Link href="/" className="text-blue-600 font-bold hover:text-blue-800 transition">
-          &larr; Terug naar de homepage
-        </Link>
+
+        {/* Formulier Card */}
+        <div className="bg-slate-800/80 border border-slate-700 p-8 md:p-10 rounded-3xl shadow-2xl backdrop-blur-sm">
+          {submitted ? (
+            <div className="text-center py-12">
+              <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Bericht ontvangen!</h2>
+              <p className="text-slate-300 mb-8">
+                Bedankt voor je bericht. We bekijken je aanvraag en komen er zo snel mogelijk asynchroon bij je op terug.
+              </p>
+              <Link
+                href="/"
+                className="inline-flex items-center text-blue-400 font-bold hover:text-blue-300 transition"
+              >
+                &larr; Terug naar de homepage
+              </Link>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-slate-300">
+                    Naam *
+                  </label>
+                  <input
+                    type="text"
+                    name="naam"
+                    required
+                    placeholder="Je naam"
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-slate-300">
+                    E-mailadres *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="naam@bedrijf.nl"
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold mb-2 text-slate-300">
+                  Waar gaat je vraag over?
+                </label>
+                <select
+                  name="onderwerp"
+                  className="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition"
+                >
+                  <option value="Tikbon.com">Vraag over Tikbon.com</option>
+                  <option value="Nieuw WebApp Idee">Eigen WebApp / Micro-SaaS idee laten bouwen</option>
+                  <option value="Overig">Overige vraag / Samenwerking</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold mb-2 text-slate-300">
+                  Je bericht / Toelichting *
+                </label>
+                <textarea
+                  name="bericht"
+                  required
+                  rows={5}
+                  placeholder="Omschrijf kort je vraag of idee..."
+                  className="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 disabled:opacity-50"
+              >
+                <span>{loading ? 'Versturen...' : 'Bericht Versturen'}</span>
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
+          )}
+        </div>
+
+        <div className="text-center mt-8">
+          <Link href="/" className="text-slate-400 hover:text-white transition text-sm">
+            &larr; Terug naar de homepage
+          </Link>
+        </div>
+
       </div>
     </main>
   );
