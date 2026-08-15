@@ -1,6 +1,6 @@
 {
-  "name": "cbdienstverlening-website",
-  "version": "0.1.0",
+  "name": "cbdienstverlening-web",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "next": "14.2.5"
+    "lucide-react": "^0.378.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
