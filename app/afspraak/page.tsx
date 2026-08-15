@@ -42,28 +42,28 @@ export default function Contact() {
     <main className="min-h-screen py-16 px-6 bg-slate-50 text-slate-900 flex flex-col items-center justify-center">
       <div className="max-w-3xl w-full">
         
-        {/* USPs voor Asynchrone Communicatie */}
+        {/* USPs gericht op de klant */}
         <div className="text-center mb-10">
           <div className="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-blue-200">
-            Asynchroon & Direct ⚡
+            Snel & Persoonlijk Contact ✉️
           </div>
           <h1 className="text-4xl font-extrabold mb-4 text-slate-900">Stuur ons een bericht</h1>
           <p className="text-slate-600 text-lg max-w-xl mx-auto">
-            Wij geloven in gefocust werken zonder afleiding. Laat je vraag of idee achter en we reageren binnen 24 uur met een inhoudelijk antwoord.
+            Heb je een vraag over Tikbon.com, een idee voor een nieuwe WebApp of wil je sparren? Laat een bericht achter en we reageren snel.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-left">
             <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
               <Clock className="text-blue-600 w-6 h-6 flex-shrink-0" />
-              <span className="text-sm font-medium text-slate-700">Geen lange telefoontjes, direct ter zake.</span>
-            </div>
-            <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
-              <MessageSquare className="text-blue-600 w-6 h-6 flex-shrink-0" />
-              <span className="text-sm font-medium text-slate-700">Reactie via e-mail op jouw tempo.</span>
+              <span className="text-sm font-medium text-slate-700">Binnen 24 uur reactie in je mailbox.</span>
             </div>
             <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
               <Zap className="text-blue-600 w-6 h-6 flex-shrink-0" />
-              <span className="text-sm font-medium text-slate-700">Snel een helder en inhoudelijk advies.</span>
+              <span className="text-sm font-medium text-slate-700">Direct inhoudelijk & eerlijk advies.</span>
+            </div>
+            <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+              <MessageSquare className="text-blue-600 w-6 h-6 flex-shrink-0" />
+              <span className="text-sm font-medium text-slate-700">Persoonlijk contact met de ontwikkelaar.</span>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function Contact() {
               <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2 text-slate-900">Bericht ontvangen!</h2>
               <p className="text-slate-600 mb-8">
-                Bedankt voor je bericht. We bekijken je aanvraag en komen er zo snel mogelijk asynchroon bij je op terug.
+                Bedankt voor je bericht. We bekijken je vraag en nemen zo snel mogelijk contact met je op via e-mail.
               </p>
               <Link
                 href="/"
