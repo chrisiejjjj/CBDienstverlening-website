@@ -58,7 +58,8 @@ export default function RootLayout({
               <h3 className="text-white text-lg font-bold mb-4">Contact</h3>
               <ul className="space-y-2">
                 <li>Email: info@cbdienstverlening.nl</li>
-                <li>KvK: [Vul KvK in]</li>
+                <li>KvK: 67000185</li>
+                <li>BWT: NL002266049B76</li>
                 <li>Locatie: Nederland</li>
               </ul>
             </div>
