@@ -41,7 +41,7 @@ export default function Home() {
             </div>
             <h3 className="text-4xl font-extrabold mb-4 text-slate-900">Tikbon.com</h3>
             <p className="text-lg text-slate-600 mb-8 font-medium">
-              De ultra-snelle "Snelle Werkbon" PWA voor de mobiele ZZP'er (installateurs, monteurs, klusbedrijven). Naadloos geïntegreerd met Moneybird.
+              De ultra-snelle &quot;Snelle Werkbon&quot; PWA voor de mobiele ZZP&apos;er (installateurs, monteurs, klusbedrijven).
             </p>
             
             <ul className="space-y-4 mb-8">
