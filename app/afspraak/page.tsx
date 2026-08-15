@@ -13,12 +13,18 @@ export default function Contact() {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const naam = formData.get('naam') as string;
+    const email = formData.get('email') as string;
+    const onderwerp = formData.get('onderwerp') as string;
+    const bericht = formData.get('bericht') as string;
+
+    // We voegen het e-mailadres toe aan het bericht-veld zodat je weet wie je kunt antwoorden
+    const volledigBericht = `E-mailadres afzender: ${email}\n\nBericht:\n${bericht}`;
 
     const googleFormData = new FormData();
-    googleFormData.append('entry.123456789', formData.get('naam') as string);
-    googleFormData.append('entry.987654321', formData.get('email') as string);
-    googleFormData.append('entry.456789123', formData.get('onderwerp') as string);
-    googleFormData.append('entry.654321987', formData.get('bericht') as string);
+    googleFormData.append('entry.1935819871', naam);
+    googleFormData.append('entry.588594699', onderwerp);
+    googleFormData.append('entry.6505231581749205308', volledigBericht);
 
     try {
       await fetch(
@@ -32,7 +38,7 @@ export default function Contact() {
       setSubmitted(true);
     } catch (error) {
       console.error('Fout bij versturen:', error);
-      alert('Er ging iets mis. Probeer het opnieuw.');
+      alert('Er ging iets mis bij het versturen. Probeer het opnieuw.');
     } finally {
       setLoading(false);
     }
@@ -42,7 +48,7 @@ export default function Contact() {
     <main className="min-h-screen py-16 px-6 bg-slate-50 text-slate-900 flex flex-col items-center justify-center">
       <div className="max-w-3xl w-full">
         
-        {/* USPs gericht op de klant */}
+        {/* USPs */}
         <div className="text-center mb-10">
           <div className="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-blue-200">
             Snel & Persoonlijk Contact ✉️
@@ -75,7 +81,7 @@ export default function Contact() {
               <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2 text-slate-900">Bericht ontvangen!</h2>
               <p className="text-slate-600 mb-8">
-                Bedankt voor je bericht. We bekijken je vraag en nemen zo snel mogelijk contact met je op via e-mail.
+                Bedankt voor je bericht. We bekijken je vraag en nemen zo snel mogelijk contact met je op.
               </p>
               <Link
                 href="/"
@@ -115,21 +121,20 @@ export default function Contact() {
 
               <div>
                 <label className="block text-sm font-semibold mb-2 text-slate-700">
-                  Waar gaat je vraag over?
+                  Onderwerp *
                 </label>
-                <select
+                <input
+                  type="text"
                   name="onderwerp"
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
-                >
-                  <option value="Tikbon.com">Vraag over Tikbon.com</option>
-                  <option value="Nieuw WebApp Idee">Eigen WebApp / Micro-SaaS idee laten bouwen</option>
-                  <option value="Overig">Overige vraag / Samenwerking</option>
-                </select>
+                  required
+                  placeholder="Bijv: Vraag over Tikbon.com / WebApp idee"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+                />
               </div>
 
               <div>
                 <label className="block text-sm font-semibold mb-2 text-slate-700">
-                  Je bericht / Toelichting *
+                  Uw Bericht *
                 </label>
                 <textarea
                   name="bericht"
