@@ -6,7 +6,7 @@ import Link from 'next/link';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'CBDienstverlening | WebApps & SaaS',
+  title: 'CB Dienstverlening | WebApps & SaaS',
   description: 'Wij bouwen slimme WebApps voor ondernemers. Ontdek onze initiatieven zoals Tikbon.com.',
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
         <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <Link href="/" className="text-2xl font-black text-gray-900 tracking-tight">
-              CBDienstverlening<span className="text-blue-600">.nl</span>
+              CB Dienstverlening<span className="text-blue-600">.nl</span>
             </Link>
             <nav className="hidden md:flex gap-6 items-center font-medium text-gray-600">
               <Link href="/" className="hover:text-blue-600 transition">Home</Link>
@@ -41,7 +41,7 @@ export default function RootLayout({
         <footer className="bg-gray-900 text-gray-400 py-12 px-6 border-t border-gray-800">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">CBDienstverlening.nl</h3>
+              <h3 className="text-white text-lg font-bold mb-4">CB Dienstverlening.nl</h3>
               <p className="mb-4">
                 Wij transformeren complexe werkprocessen in simpele, doelgerichte WebApps. Vroeger IT-beheer, nu pure innovatie.
               </p>
