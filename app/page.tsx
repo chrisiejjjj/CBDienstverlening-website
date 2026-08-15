@@ -9,7 +9,7 @@ export default function Home() {
       <section className="w-full bg-slate-900 text-white py-24 px-6 text-center">
         <div className="max-w-3xl mx-auto">
           <div className="inline-block bg-blue-500/20 text-blue-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-blue-500/30">
-             Hello World 🚀
+             Slimme WebApps & Tools ⚡
           </div>
           <h1 className="text-5xl font-extrabold mb-6 leading-tight">
             Van IT-Beheer naar <span className="text-blue-500">Slimme WebApps</span>
