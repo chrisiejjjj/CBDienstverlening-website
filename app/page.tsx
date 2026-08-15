@@ -15,8 +15,7 @@ export default function Home() {
             Van IT-Beheer naar <span className="text-blue-500">Slimme WebApps</span>
           </h1>
           <p className="text-xl text-slate-300 mb-10">
-            CBDienstverlening stopt met IT-services, hardware en gamingsystemen.
-            Onze volledige focus ligt vanaf nu op het ontwikkelen van snelle, specifieke WebApps en Micro-SaaS oplossingen.
+            CB Dienstverlening focust zich op het ontwikkelen van snelle, specifieke WebApps en Micro-SaaS oplossingen.
           </p>
           <Link href="#initiatieven" className="bg-blue-600 text-white px-8 py-3.5 rounded-lg font-bold hover:bg-blue-500 transition shadow-lg inline-flex items-center">
             Bekijk onze projecten <ArrowRight className="ml-2 w-5 h-5" />
