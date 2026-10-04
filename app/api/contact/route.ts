@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
 export async function POST(request: Request) {
   try {
@@ -19,8 +19,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Direct via Resend mailserver naar jouw e-mail
-    const { data, error } = await resend.emails.send({
+    const response = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: [process.env.NOTIFICATION_EMAIL || 'info@cbdienstverlening.nl'],
       replyTo: email,
@@ -36,16 +35,14 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (error) {
-      console.error('Resend fout:', error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+    if (response.error) {
+      return NextResponse.json({ error: response.error.message }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, data });
-  } catch (error: any) {
-    console.error('Server fout:', error);
+    return NextResponse.json({ success: true, data: response.data });
+  } catch (err: any) {
     return NextResponse.json(
-      { error: error?.message || 'Server fout bij het versturen van het bericht.' },
+      { error: err?.message || 'Serverfout bij versturen.' },
       { status: 500 }
     );
   }
