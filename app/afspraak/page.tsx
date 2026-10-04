@@ -7,10 +7,13 @@ import { Send, CheckCircle2, MessageSquare, Clock, Zap } from 'lucide-react';
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation(); // Blokkeert eventuele externe scripts/Google form triggers
     setLoading(true);
+    setErrorMsg('');
 
     const formData = new FormData(e.currentTarget);
     const naam = formData.get('naam') as string;
@@ -27,14 +30,16 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         body: JSON.stringify({ naam, email, onderwerp, bericht }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setSubmitted(true);
       } else {
-        alert('Er ging iets mis bij het versturen. Probeer het opnieuw.');
+        setErrorMsg(data.error || 'Er ging iets mis bij het versturen.');
       }
-    } catch (error) {
-      console.error('Fout bij versturen:', error);
-      alert('Er ging iets mis bij het versturen. Probeer het opnieuw.');
+    } catch (err) {
+      console.error('Fout bij versturen:', err);
+      setErrorMsg('Er ging iets mis bij het verbinden met de server.');
     } finally {
       setLoading(false);
     }
@@ -88,6 +93,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {errorMsg && (
+                <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-medium">
+                  {errorMsg}
+                </div>
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold mb-2 text-slate-700">
