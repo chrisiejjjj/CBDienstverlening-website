@@ -20,9 +20,9 @@ export async function POST(request: Request) {
     }
 
     const response = await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+      from: process.env.EMAIL_FROM || 'CBDienstverlening <onboarding@resend.dev>',
       to: [process.env.NOTIFICATION_EMAIL || 'info@cbdienstverlening.nl'],
-      replyTo: email,
+      reply_to: email,
       subject: `Nieuw contactbericht: ${onderwerp}`,
       html: `
         <h2>Nieuw contactbericht via de website</h2>
