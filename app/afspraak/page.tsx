@@ -8,7 +8,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -18,24 +18,20 @@ export default function Contact() {
     const onderwerp = formData.get('onderwerp') as string;
     const bericht = formData.get('bericht') as string;
 
-    // We voegen het e-mailadres toe aan het bericht-veld zodat je weet wie je kunt antwoorden
-    const volledigBericht = `E-mailadres afzender: ${email}\n\nBericht:\n${bericht}`;
-
-    const googleFormData = new FormData();
-    googleFormData.append('entry.1935819871', naam);
-    googleFormData.append('entry.588594699', onderwerp);
-    googleFormData.append('entry.6505231581749205308', volledigBericht);
-
     try {
-      await fetch(
-        'https://docs.google.com/forms/d/e/1FAIpQLSen5gqKsPpPqEoeImxcu2AgEDqQZUtT_CfDRpdYoOWDuHKP3w/formResponse',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          body: googleFormData,
-        }
-      );
-      setSubmitted(true);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ naam, email, onderwerp, bericht }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert('Er ging iets mis bij het versturen. Probeer het opnieuw.');
+      }
     } catch (error) {
       console.error('Fout bij versturen:', error);
       alert('Er ging iets mis bij het versturen. Probeer het opnieuw.');
