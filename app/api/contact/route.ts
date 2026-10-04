@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     const data = await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'Tikbon <onboarding@resend.dev>',
+      from: process.env.EMAIL_FROM || 'CBDienstverlening <onboarding@resend.dev>',
       to: [process.env.NOTIFICATION_EMAIL || 'info@cbdienstverlening.nl'],
       replyTo: email, // Hiermee antwoord je direct naar de afzender als je in je inbox op 'Beantwoorden' klikt!
       subject: `Nieuwe afspraak / contactbericht: ${onderwerp}`,
