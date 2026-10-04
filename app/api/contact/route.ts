@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const data = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'CBDienstverlening <onboarding@resend.dev>',
       to: [process.env.NOTIFICATION_EMAIL || 'info@cbdienstverlening.nl'],
-      replyTo: email, // Hiermee antwoord je direct naar de afzender als je in je inbox op 'Beantwoorden' klikt!
+      replyTo: email,
       subject: `Nieuwe afspraak / contactbericht: ${onderwerp}`,
       html: `
         <h2>Nieuw bericht ontvangen via de website</h2>
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         <p><strong>Onderwerp:</strong> ${onderwerp}</p>
         <br />
         <p><strong>Bericht:</strong></p>
-        <p style="white-space: pre-wrap; background-color: #f4f4f4; padding: 12px; rounded: 8px;">${bericht}</p>
+        <p style="white-space: pre-wrap; background-color: #f4f4f4; padding: 12px; border-radius: 8px;">${bericht}</p>
       `,
     });
 
