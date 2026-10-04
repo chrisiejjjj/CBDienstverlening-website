@@ -6,15 +6,20 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { naam, email, onderwerp, bericht } = body;
+    const naam = body.naam ? String(body.naam).trim() : '';
+    const email = body.email ? String(body.email).trim() : '';
+    const onderwerp = body.onderwerp ? String(body.onderwerp).trim() : '';
+    const bericht = body.bericht ? String(body.bericht).trim() : '';
 
+    // Valideer of alle velden aanwezig zijn
     if (!naam || !email || !onderwerp || !bericht) {
       return NextResponse.json(
-        { error: 'Alle velden zijn verplicht.' },
+        { error: 'Niet alle velden zijn ingevuld.' },
         { status: 400 }
       );
     }
 
+    // Verstuur de e-mail via Resend
     const data = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'CBDienstverlening <onboarding@resend.dev>',
       to: [process.env.NOTIFICATION_EMAIL || 'info@cbdienstverlening.nl'],
@@ -32,10 +37,10 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true, data });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Resend error:', error);
     return NextResponse.json(
-      { error: 'Fout bij het versturen van de e-mail.' },
+      { error: error?.message || 'Fout bij het versturen van de e-mail.' },
       { status: 500 }
     );
   }
